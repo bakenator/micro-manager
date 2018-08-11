@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+  <head>
+    <title>MicroManager</title>
+    <link rel="stylesheet" type="text/css" href="/app.bundle.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+  </head>
+  <body>
+    <script>
+      window.socket = io({
+          query: {
+            token: '<%=token%>'
+          }
+      });
+    </script>
+    <div id='react-root'></div>
+    <script type="text/javascript" src="/bundle.js"></script>
+  </body>
+</html>

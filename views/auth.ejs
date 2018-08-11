@@ -1,0 +1,16 @@
+<!doctype html>
+<html>
+  <head>
+    <title>MicroManager</title>
+    <link rel="stylesheet" type="text/css" href="/app.bundle.css">
+  </head>
+  <body class='auth-page'>
+  	<h1>Welcome to the MicroManager! &trade;</h1>
+  	<p class="sub-title">(Made for <%= repo %>)</p>
+  	<img class='manager-image' src="/manager.png"/>
+  	<p>Please click below to authenticate with Github for access to our organization's events</p>
+    <p>
+      <a href="https://github.com/login/oauth/authorize?scope=read:org&client_id=<%= client_id %>">Authenticate With Github</a> 
+    </p>
+  </body>
+</html>
