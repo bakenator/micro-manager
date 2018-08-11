@@ -20,7 +20,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "5254bf8296ea222ea4e5"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "ff6a2ae7437eab9da73f"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -1052,7 +1052,7 @@ var EventList = function () {
 			url: 'https://api.github.com/repos/' + process.env.REPO + '/events?page=' + this.pageNum,
 			headers: {
 				'User-Agent': 'request',
-				'Authorization': 'token ' + process.env.TOKEN
+				'Authorization': process.env.NO_AUTH ? '' : 'token ' + process.env.TOKEN
 			}
 		};
 	}
@@ -1168,7 +1168,7 @@ var MemberModel = function () {
 			url: 'https://api.github.com/repos/' + process.env.REPO + '/contributors?page=' + this.pageNum,
 			headers: {
 				'User-Agent': 'request',
-				'Authorization': 'token ' + process.env.TOKEN
+				'Authorization': process.env.NO_AUTH ? '' : 'token ' + process.env.TOKEN
 			}
 		};
 	}

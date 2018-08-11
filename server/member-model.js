@@ -9,7 +9,7 @@ export default class MemberModel {
 		  url: 'https://api.github.com/repos/' + process.env.REPO + '/contributors?page='+ this.pageNum,
 		  headers: {
 		    'User-Agent': 'request',
-		    'Authorization': 'token ' + process.env.TOKEN
+		    'Authorization': process.env.NO_AUTH ? '' : 'token ' + process.env.TOKEN
 		  }
 		};
 	}
