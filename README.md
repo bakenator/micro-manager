@@ -1,5 +1,7 @@
 # Micro-Manager
 
+![Micro-Manager](https://raw.githubusercontent.com/bakenator/micro-manager/master/public/example.png)
+
 ## Instuctions to Run:
 
 1. In the micro-manager directory create a file titled `.env` and add the following contents to the file.
