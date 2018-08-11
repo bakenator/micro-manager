@@ -1,4 +1,4 @@
-# activityPub
+# Micro-Manager
 
 ## Instuctions to Run:
 
