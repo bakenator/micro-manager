@@ -11,7 +11,7 @@ export default class EventList {
 		  url: 'https://api.github.com/repos/' + process.env.REPO + '/events?page=' + this.pageNum,
 		  headers: {
 		    'User-Agent': 'request',
-		    'Authorization': process.env.NO_AUTH ? '' : 'token ' + process.env.TOKEN
+		    'Authorization': process.env.TOKEN ? 'token ' + process.env.TOKEN : ''
 		  }
 		};
 	}
