@@ -61,7 +61,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "572e406b4e296baaf4d1"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "258380d475a9b56e5008"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -18109,6 +18109,11 @@ var Root = function (_Component) {
           members: githubMembers,
           selectedUsers: selectedUsers,
           updateSelectedUser: this.updateSelectedUser }),
+        _react2.default.createElement(
+          'div',
+          { className: 'repo-title' },
+          repoTitle
+        ),
         _react2.default.createElement(
           'div',
           { className: 'user-box-holder' },
@@ -37741,8 +37746,9 @@ var UserBox = function (_Component) {
       var boxPerRow = Math.floor((window.innerWidth - sideMenuWidth) / boxWidth);
       var userRows = Math.ceil(shownUsers.length / boxPerRow);
 
+      // subtracted 5 for the repo-title height
       var boxHeight = {
-        height: 100 / userRows - 0.5 + 'vh'
+        height: 95 / userRows - 0.5 + 'vh'
       };
 
       return _react2.default.createElement(

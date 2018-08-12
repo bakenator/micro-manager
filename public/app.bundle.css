@@ -23,6 +23,13 @@ body {
     margin: 0;
     text-align: center; }
 
+.repo-title {
+  font-size: 25px;
+  background-color: #efefef;
+  height: 5vh;
+  text-align: center;
+  border: solid 1px; }
+
 .user-box-holder {
   display: flex;
   flex-wrap: wrap; }

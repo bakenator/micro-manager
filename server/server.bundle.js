@@ -20,7 +20,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "bd419e340e3e7f9b1492"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "a75fb55e14cf8be0a0bb"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -927,7 +927,7 @@ var auth = new _authentication2.default();
 
 app.get('/', function (req, res) {
   if (auth.authorizedRequest(req)) {
-    res.render('app.ejs', { token: req.session.token });
+    res.render('app.ejs', { token: req.session.token, repo: process.env.REPO });
   } else {
     res.render('auth.ejs', { client_id: process.env.GH_BASIC_CLIENT_ID, repo: process.env.REPO });
   }

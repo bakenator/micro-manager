@@ -34,7 +34,7 @@ const auth = new Authentication();
 
 app.get('/', function(req, res){
   if (auth.authorizedRequest(req)) {
-    res.render('app.ejs', {token: req.session.token});  
+    res.render('app.ejs', {token: req.session.token, repo: process.env.REPO});  
   } else {
     res.render('auth.ejs', {client_id: process.env.GH_BASIC_CLIENT_ID, repo: process.env.REPO});
   }

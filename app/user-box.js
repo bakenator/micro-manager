@@ -40,8 +40,9 @@ export default class UserBox extends Component {
     const boxPerRow = Math.floor((window.innerWidth - sideMenuWidth) / boxWidth)
     const userRows = Math.ceil(shownUsers.length / boxPerRow)
 
+    // subtracted 5 for the repo-title height
     var boxHeight = {
-      height: `${ 100 / userRows - 0.5 }vh`
+      height: `${ 95 / userRows - 0.5 }vh`
     }
 
     return (
