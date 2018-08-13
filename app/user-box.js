@@ -18,10 +18,13 @@ export default class UserBox extends Component {
 
   displayEvent(e) {
     const minutesAgo = moment().diff(moment(e.time), 'minutes')
-    const isNewClass = minutesAgo < 20 ? 'new-event' : ''
+    const daysAgo = moment().diff(moment(e.time), 'days')
+    const isNewClass = minutesAgo < 30 ? 'new-event' : ''
+    const isMediumClass = minutesAgo < 120 ? 'medium-event' : ''
+    const oldClass = daysAgo > 0 ? 'old-event' : ''
 
     return (
-      <div key={e.id} className={`event-tile ${isNewClass}`}>
+      <div key={e.id} className={`event-tile ${isNewClass || isMediumClass || oldClass}`}>
         <div className='event-icon'>
           {e.icon}
         </div>

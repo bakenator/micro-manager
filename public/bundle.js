@@ -61,7 +61,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "258380d475a9b56e5008"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "da5099a0eed881e26567"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -37704,11 +37704,14 @@ var UserBox = function (_Component) {
     key: 'displayEvent',
     value: function displayEvent(e) {
       var minutesAgo = (0, _moment2.default)().diff((0, _moment2.default)(e.time), 'minutes');
-      var isNewClass = minutesAgo < 20 ? 'new-event' : '';
+      var daysAgo = (0, _moment2.default)().diff((0, _moment2.default)(e.time), 'days');
+      var isNewClass = minutesAgo < 30 ? 'new-event' : '';
+      var isMediumClass = minutesAgo < 120 ? 'medium-event' : '';
+      var oldClass = daysAgo > 0 ? 'old-event' : '';
 
       return _react2.default.createElement(
         'div',
-        { key: e.id, className: 'event-tile ' + isNewClass },
+        { key: e.id, className: 'event-tile ' + (isNewClass || isMediumClass || oldClass) },
         _react2.default.createElement(
           'div',
           { className: 'event-icon' },
@@ -38245,7 +38248,7 @@ var InfoModal = function (_Component) {
           _react2.default.createElement(
             'strong',
             null,
-            '20 minutes'
+            '30 minutes'
           ),
           ' are shown with green backgrounds'
         ),

@@ -10,6 +10,12 @@ body {
   to {
     background-color: #c9ffc4; } }
 
+@-webkit-keyframes fadeinyellow {
+  from {
+    background-color: white; }
+  to {
+    background-color: #feffe0; } }
+
 .info-modal {
   padding: 15px;
   width: 500px;
@@ -78,6 +84,19 @@ body {
       -o-animation: fadein 2s;
       /* Opera < 12.1 */
       animation: fadein 2s; }
+    .user-box .event-tile.medium-event {
+      background-color: #feffe0;
+      -webkit-animation: fadeinyellow 2s;
+      /* Safari, Chrome and Opera > 12.1 */
+      -moz-animation: fadeinyellow 2s;
+      /* Firefox < 16 */
+      -ms-animation: fadeinyellow 2s;
+      /* Internet Explorer */
+      -o-animation: fadeinyellow 2s;
+      /* Opera < 12.1 */
+      animation: fadeinyellow 2s; }
+    .user-box .event-tile.old-event {
+      color: #d0d0d0; }
 
 .member-list {
   font-weight: 100;
