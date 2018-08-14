@@ -1,9 +1,6 @@
 body {
-	font-family: Helvetica, Sans-Serif;
-	margin: 0;
-	padding-right: 30px;
+	color: white;
 }
-
 /* Safari, Chrome and Opera > 12.1 */
 @-webkit-keyframes fadein {
     from { background-color: white; }
@@ -171,21 +168,26 @@ body {
 
 
 .auth-page {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	background-color: #afafaf;
+	background-image: url("/carpet-tiles.jpg");
+	text-align: center;
+	background-color: lightgrey;
 
-	.sub-title {
-		margin-top: 0;
+	h1 {
+		display: inline-block;
+		background-color: tomato;
+		color: black;
 	}
-
 	.manager-image {
 		height: 200px;
 		width: 300px;
 		margin-bottom: 23px;
 	}
-	p {
-		font-weight: 600;
+	a {
+		background-color: orchid;
+		padding: 9px;
+	}
+	.trademark {
+		display: block;
+		margin-top: 200px;
 	}
 }

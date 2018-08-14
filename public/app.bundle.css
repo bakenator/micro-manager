@@ -1,7 +1,5 @@
 body {
-  font-family: Helvetica, Sans-Serif;
-  margin: 0;
-  padding-right: 30px; }
+  color: white; }
 
 /* Safari, Chrome and Opera > 12.1 */
 @-webkit-keyframes fadein {
@@ -135,17 +133,22 @@ body {
       background-color: #bcdaff; }
 
 .auth-page {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #afafaf; }
-  .auth-page .sub-title {
-    margin-top: 0; }
+  background-image: url("/carpet-tiles.jpg");
+  text-align: center;
+  background-color: lightgrey; }
+  .auth-page h1 {
+    display: inline-block;
+    background-color: tomato;
+    color: black; }
   .auth-page .manager-image {
     height: 200px;
     width: 300px;
     margin-bottom: 23px; }
-  .auth-page p {
-    font-weight: 600; }
+  .auth-page a {
+    background-color: orchid;
+    padding: 9px; }
+  .auth-page .trademark {
+    display: block;
+    margin-top: 200px; }
 
 /*# sourceMappingURL=app.bundle.css.map*/
