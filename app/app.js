@@ -83,6 +83,17 @@ class Root extends Component {
     this.setState({showModal: false})
   }
 
+  get currentWinner() {
+    const {eventsByUser} = this.state
+    const users = Object.keys(eventsByUser)
+    //finding the username with the most events
+    return users.reduce((accum, user) => {
+      if (!accum) {return user}
+      if (eventsByUser[user].length > eventsByUser[accum].length) {return user}
+      return accum
+    }, '')
+  }
+
   render () {
     const {githubEvents, githubMembers, eventsByUser, selectedUsers, showModal} = this.state;
 
@@ -106,7 +117,11 @@ class Root extends Component {
           selectedUsers={selectedUsers}
           updateSelectedUser={this.updateSelectedUser}/>
         {/* repoTitle is set in app.ejs */}
-        <div className='repo-title'>{repoTitle}</div>
+        <div className='repo-title'>
+          <div>Currently Winning: {this.currentWinner}</div>
+          <div>{repoTitle}</div>
+          
+        </div>
         <div className='user-box-holder'>
           {userBoxes}
         </div>

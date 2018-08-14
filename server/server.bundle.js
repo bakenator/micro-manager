@@ -20,7 +20,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "a75fb55e14cf8be0a0bb"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "27c20fdad829f98618b9"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -741,6 +741,7 @@ var EventParser = function () {
 		key: 'PushEvent',
 		value: function PushEvent(e) {
 			var pEvent = {};
+			var branch = e.payload.ref.replace(/refs\/heads\//g, '');
 			pEvent.id = e.id;
 			pEvent.time = e.created_at;
 			pEvent.type = e.type;
@@ -748,7 +749,8 @@ var EventParser = function () {
 			pEvent.icon = '';
 			pEvent.text = '';
 			pEvent.icon = 'P';
-			pEvent.text = 'Pushed ' + e.payload.size + ' commits to ' + e.payload.ref.replace(/refs\/heads\//g, '') + ' branch';
+			pEvent.text = 'Pushed ' + e.payload.size + ' commits to ' + branch + ' branch';
+			pEvent.link = 'https://github.com/' + process.env.REPO + '/tree/' + branch;
 			return pEvent;
 		}
 	}, {
@@ -767,6 +769,7 @@ var EventParser = function () {
 			} else {
 				pEvent.text = e.payload.action + ' PR #' + e.payload.number + ' - ' + e.payload.pull_request.title;
 			}
+			pEvent.link = e.payload.pull_request.html_url;
 			return pEvent;
 		}
 	}, {
@@ -791,6 +794,7 @@ var EventParser = function () {
 			pEvent.icon = 'I';
 			pEvent.time = e.created_at;
 			pEvent.text = e.payload.action + ' issue #' + e.payload.issue.number + ' - ' + e.payload.issue.title;
+			pEvent.link = e.payload.issue.html_url;
 			return pEvent;
 		}
 	}, {
@@ -807,6 +811,7 @@ var EventParser = function () {
 			pEvent.icon = 'B';
 			pEvent.time = e.created_at;
 			pEvent.text = 'Created branch - ' + e.payload.ref;
+			pEvent.link = 'https://github.com/' + process.env.REPO + '/tree/' + e.payload.ref;
 			return pEvent;
 		}
 	}, {
@@ -823,6 +828,7 @@ var EventParser = function () {
 			pEvent.icon = 'C';
 			pEvent.time = e.created_at;
 			pEvent.text = 'Commented on issue #' + e.payload.issue.number + ' - ' + e.payload.issue.title;
+			pEvent.link = e.payload.comment.html_url;
 			return pEvent;
 		}
 	}, {
@@ -835,6 +841,7 @@ var EventParser = function () {
 			pEvent.icon = 'C';
 			pEvent.time = e.created_at;
 			pEvent.text = 'Commented on PR #' + e.payload.pull_request.number + ' - ' + e.payload.pull_request.title;
+			pEvent.link = e.payload.comment.html_url;
 			return pEvent;
 		}
 	}]);

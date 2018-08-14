@@ -61,7 +61,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "da5099a0eed881e26567"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "fbe629773d372e9ec01f"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -18112,7 +18112,17 @@ var Root = function (_Component) {
         _react2.default.createElement(
           'div',
           { className: 'repo-title' },
-          repoTitle
+          _react2.default.createElement(
+            'div',
+            null,
+            'Currently Winning: ',
+            this.currentWinner
+          ),
+          _react2.default.createElement(
+            'div',
+            null,
+            repoTitle
+          )
         ),
         _react2.default.createElement(
           'div',
@@ -18121,6 +18131,23 @@ var Root = function (_Component) {
         ),
         showModal && _react2.default.createElement(_infoModal2.default, null)
       );
+    }
+  }, {
+    key: 'currentWinner',
+    get: function get() {
+      var eventsByUser = this.state.eventsByUser;
+
+      var users = Object.keys(eventsByUser);
+      //finding the username with the most events
+      return users.reduce(function (accum, user) {
+        if (!accum) {
+          return user;
+        }
+        if (eventsByUser[user].length > eventsByUser[accum].length) {
+          return user;
+        }
+        return accum;
+      }, '');
     }
   }]);
 
@@ -37711,7 +37738,10 @@ var UserBox = function (_Component) {
 
       return _react2.default.createElement(
         'div',
-        { key: e.id, className: 'event-tile ' + (isNewClass || isMediumClass || oldClass) },
+        { key: e.id, className: 'event-tile ' + (isNewClass || isMediumClass || oldClass),
+          onClick: function onClick() {
+            e.link && window.open(e.link, '_blank');
+          } },
         _react2.default.createElement(
           'div',
           { className: 'event-icon' },

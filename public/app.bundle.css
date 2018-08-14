@@ -30,6 +30,8 @@ body {
     text-align: center; }
 
 .repo-title {
+  display: flex;
+  justify-content: space-around;
   font-size: 25px;
   background-color: #efefef;
   height: 5vh;
@@ -63,7 +65,8 @@ body {
   .user-box .event-tile {
     display: flex;
     border: solid 1px black;
-    background-color: white; }
+    background-color: white;
+    cursor: pointer; }
     .user-box .event-tile .event-icon {
       padding: 4px;
       font-size: 30px;

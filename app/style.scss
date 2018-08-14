@@ -30,6 +30,8 @@ body {
 }
 
 .repo-title {
+	display: flex;
+	justify-content: space-around;
 	font-size: 25px;
 	background-color: #efefef;
     height: 5vh;
@@ -75,6 +77,7 @@ body {
 		display: flex;
 		border: solid 1px black;
 		background-color: white;
+		cursor: pointer;
 		.event-icon {
 			padding: 4px;
     		font-size: 30px;
