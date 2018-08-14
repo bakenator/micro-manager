@@ -12,7 +12,7 @@ This view can give you an overall picture of what code changes have been made in
 
 ```
 SESSION_SECRET=anySecretPhrase
-REPO=uber/deck.gl
+REPO=mrdoob/three.js
 NO_AUTH=true
 ```
 
