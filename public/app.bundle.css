@@ -1,4 +1,6 @@
 body {
+  background-image: url("/carpet-tiles.jpg");
+  background-color: darkgrey;
   color: white; }
 
 /* Safari, Chrome and Opera > 12.1 */
@@ -14,25 +16,24 @@ body {
   to {
     background-color: #feffe0; } }
 
-.info-modal {
-  padding: 15px;
-  width: 500px;
-  background-color: #efefef;
-  border: 1px solid Black;
-  text-align: left;
-  position: absolute;
-  top: calc(30vh - (/* height */300px / 2));
-  left: calc(50vw - (/* width */500px / 2)); }
-  .info-modal .title {
-    margin: 0;
-    text-align: center; }
+h1 {
+  background-color: tomato;
+  color: black;
+  text-align: center; }
 
-.repo-title {
-  font-size: 25px;
-  background-color: #efefef;
-  height: 5vh;
-  text-align: center;
-  border: solid 1px; }
+.info-modal {
+  padding: 5px;
+  background-color: black;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  text-align: center; }
+  .info-modal h2 {
+    display: block;
+    background-color: turquoise;
+    color: black;
+    border-bottom: 1px solid lightgrey; }
 
 .user-box-holder {
   display: flex;
@@ -45,18 +46,12 @@ body {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    height: 60px;
     width: 295px;
-    background-color: #efefef;
-    border-right: solid 2px black;
-    border-left: solid 2px black;
-    border-top: solid 2px black; }
-    .user-box .title-bar .user-name {
-      font-size: 30px; }
+    background-color: tomato; }
   .user-box .spacer-div {
     height: 60px; }
   .user-box .event-list {
-    overflow-y: auto;
+    overflow-y: scroll;
     border: solid 2px black; }
   .user-box .event-tile {
     display: flex;
@@ -97,53 +92,39 @@ body {
       color: #d0d0d0; }
 
 .member-list {
-  font-weight: 100;
-  background: #efefef;
+  background-color: black;
   width: 250px;
   height: 100%;
-  padding-left: 40px;
   position: fixed;
+  top: -100%;
+  right: 0;
   z-index: 100;
-  -webkit-box-shadow: -3px 0px 5px 0px rgba(0, 0, 0, 0.2);
-  box-shadow: -3px 0px 5px 0px rgba(0, 0, 0, 0.2);
-  top: 0px;
-  right: -260px;
-  transition: all .3s;
-  -webkit-transition: all .3s;
-  color: #222; }
+  transition: all .3s; }
   .member-list:hover {
-    transform: translate3d(-230px, 0, 0);
+    transform: translate3d(0, 100%, 0);
     animation-timing-function: 1s ease-in; }
   .member-list .title {
-    top: 50%;
-    position: absolute;
-    -webkit-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
-    transform: rotate(270deg);
-    left: -45px;
-    font-weight: 800;
-    font-size: 15px; }
+    background-color: palegoldenrod;
+    color: saddlebrown;
+    text-align: center;
+    text-transform: uppercase;
+    margin: 0;
+    position: relative;
+    top: 100%; }
   .member-list .members-holder {
     height: 100%;
     overflow-y: auto; }
-  .member-list .member-tile {
-    padding: 5px 0px 5px 20px; }
-    .member-list .member-tile.selected-user {
-      background-color: #bcdaff; }
+  .member-list .member-item.selected-user {
+    background-color: #bcdaff; }
 
 .auth-page {
-  background-image: url("/carpet-tiles.jpg");
-  text-align: center;
-  background-color: lightgrey; }
-  .auth-page h1 {
-    display: inline-block;
-    background-color: tomato;
-    color: black; }
+  text-align: center; }
   .auth-page .manager-image {
     height: 200px;
     width: 300px;
     margin-bottom: 23px; }
+  .auth-page h1 {
+    display: inline-block; }
   .auth-page a {
     background-color: orchid;
     padding: 9px; }

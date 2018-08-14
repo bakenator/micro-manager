@@ -52,7 +52,7 @@ export default class UserBox extends Component {
       <div className="user-box">
         <div className='title-bar'>
           <img height={50} width={50} src={user_pic} alt="githubPic"/>
-          <div className='user-name'>{user}</div>
+          <h3 className='user-name'>{user}</h3>
         </div>
 
         <div 

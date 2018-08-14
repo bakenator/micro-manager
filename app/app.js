@@ -106,7 +106,7 @@ class Root extends Component {
           selectedUsers={selectedUsers}
           updateSelectedUser={this.updateSelectedUser}/>
         {/* repoTitle is set in app.ejs */}
-        <div className='repo-title'>{repoTitle}</div>
+        <h1>{repoTitle}</h1>
         <div className='user-box-holder'>
           {userBoxes}
         </div>

@@ -14,20 +14,22 @@ export default class MemberList extends Component {
     const memberList = members.map(m => {
       const selectedClass = selectedUsers[m.user] ? 'selected-user' : ''
       return (
-        <div 
-          className={`member-tile ${selectedClass}`}
+        <li 
+          className={`member-item ${selectedClass}`}
           key={m.user}
           onClick={() => updateSelectedUser(m)}
           > 
           {m.user}
-        </div>
+        </li>
       )
     })
 
    return ( <div className="member-list">
-      <div className="title">OFFICE DRONES</div>
+      <h4 className="title">Office Drones</h4>
         <div className='members-holder'>
-          {memberList}
+          <ul>
+            {memberList}
+          </ul>
         </div>
     </div> )
   }
