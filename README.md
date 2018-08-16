@@ -54,7 +54,7 @@ The file will need to be formatted like so:
 {
 	"groups": [
 		{"name":"GroupWhatever1", "members": ["GHName1", "GHName2", "GHName3"]},
-    {"name":"GroupSomething2", "members": ["GHName3", "GHName1", "GHName4"]}
+		{"name":"GroupSomething2", "members": ["GHName3", "GHName1", "GHName4"]}
 	]
 }
 ```
