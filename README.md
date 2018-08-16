@@ -43,6 +43,23 @@ NO_AUTH=true
 
 If you rebuild the docker container and run it, the app should now show events for your own repo
 
+
+## Groups
+
+I got tired of having to click the same people for my working group every morning, so I added a config to the server that accepts a json definition of groups.  Each group will appear in the members list with a different background color than normal member.  When clicked, the group will remove all selected office drones and add in each github member in the group.
+Groups can be added through a config file in the top level directory titled `groups.json`.  This file is included in the .gitignore by default.
+
+The file will need to be formatted like so:
+```
+{
+	"groups": [
+		{"name":"GroupWhatever1", "members": ["GHName1", "GHName2", "GHName3"]},
+    {"name":"GroupSomething2", "members": ["GHName3", "GHName1", "GHName4"]}
+	]
+}
+```
+
+
 ## Hosting and using Github Oauth
 
 This is an in process feature, but could be adapted for your org.
