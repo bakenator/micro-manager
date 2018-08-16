@@ -5,6 +5,7 @@ import autobind from 'react-autobind'
 import UserBox from './user-box'
 import MemberList from './member-list'
 import InfoModal from './info-modal'
+import moment from 'moment'
 
 class Root extends Component {
   constructor (props) {
@@ -84,14 +85,27 @@ class Root extends Component {
   }
 
   get currentWinner() {
-    const {eventsByUser} = this.state
+    const {eventsByUser, selectedUsers} = this.state
     const users = Object.keys(eventsByUser)
-    //finding the username with the most events
-    return users.reduce((accum, user) => {
-      if (!accum) {return user}
-      if (eventsByUser[user].length > eventsByUser[accum].length) {return user}
-      return accum
-    }, '')
+    let max = 0
+    let timeLimit = 120 // minutes
+    let winner = ''
+    // checking for 2 hr winner and retesting with longer date range if none found
+    while (!winner && timeLimit < 1200) {
+      winner = users.reduce((accum, user) => {
+        if (!Object.keys(selectedUsers).includes(user)) {return accum}
+        const userEvents = eventsByUser[user].filter(e => moment().diff(moment(e.time), 'minutes') < timeLimit)
+        if (userEvents.length > max) {
+          max = userEvents.length
+          return user
+        }
+        return accum
+      }, '')
+
+      timeLimit += 60
+    }
+
+    return winner
   }
 
   render () {

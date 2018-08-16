@@ -61,7 +61,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "fbe629773d372e9ec01f"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "fa7a61279df159debbe3"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -17966,6 +17966,10 @@ var _infoModal = __webpack_require__(156);
 
 var _infoModal2 = _interopRequireDefault(_infoModal);
 
+var _moment = __webpack_require__(0);
+
+var _moment2 = _interopRequireDefault(_moment);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -18135,19 +18139,34 @@ var Root = function (_Component) {
   }, {
     key: 'currentWinner',
     get: function get() {
-      var eventsByUser = this.state.eventsByUser;
+      var _state2 = this.state,
+          eventsByUser = _state2.eventsByUser,
+          selectedUsers = _state2.selectedUsers;
 
       var users = Object.keys(eventsByUser);
-      //finding the username with the most events
-      return users.reduce(function (accum, user) {
-        if (!accum) {
-          return user;
-        }
-        if (eventsByUser[user].length > eventsByUser[accum].length) {
-          return user;
-        }
-        return accum;
-      }, '');
+      var max = 0;
+      var timeLimit = 120; // minutes
+      var winner = '';
+      // checking for 2 hr winner and retesting with longer date range if none found
+      while (!winner && timeLimit < 1200) {
+        winner = users.reduce(function (accum, user) {
+          if (!Object.keys(selectedUsers).includes(user)) {
+            return accum;
+          }
+          var userEvents = eventsByUser[user].filter(function (e) {
+            return (0, _moment2.default)().diff((0, _moment2.default)(e.time), 'minutes') < timeLimit;
+          });
+          if (userEvents.length > max) {
+            max = userEvents.length;
+            return user;
+          }
+          return accum;
+        }, '');
+
+        timeLimit += 60;
+      }
+
+      return winner;
     }
   }]);
 
