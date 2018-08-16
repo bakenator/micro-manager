@@ -136,6 +136,8 @@ body {
     padding: 5px 0px 5px 20px; }
     .member-list .member-tile.selected-user {
       background-color: #bcdaff; }
+    .member-list .member-tile.group-tile {
+      background-color: lemonchiffon; }
 
 .auth-page {
   display: flex;

@@ -16,7 +16,8 @@ class Root extends Component {
       eventsByUser: {},
       //setting me to appear as the default
       selectedUsers: {},
-      showModal: true
+      showModal: true,
+      groups: []
     }
     autobind(this)
   }
@@ -28,7 +29,7 @@ class Root extends Component {
       socket.emit('appLoad', {});
   }
 
-  setGithubEvents({githubEvents, githubMembers, rawEvents}) {
+  setGithubEvents({githubEvents, githubMembers, groups}) {
     const {selectedUsers} = this.state;
 
     const eventsByUser = {}
@@ -49,7 +50,8 @@ class Root extends Component {
       githubEvents,
       githubMembers: activeMembers,
       eventsByUser,
-      selectedUsers: setSelectedUsers
+      selectedUsers: setSelectedUsers,
+      groups
     })
   }
 
@@ -77,6 +79,19 @@ class Root extends Component {
     }
 
     this.setState({selectedUsers})
+  }
+
+  updateGroup(group) {
+    //after clearing users, fill with selected users
+    this.setState({selectedUsers:{}}, () => {
+      const {selectedUsers, githubMembers} = this.state;
+      group.members.forEach(m => {
+        const user = githubMembers.filter(g => g.user === m)[0]
+        if (!user) {return}
+        selectedUsers[user.user] = {user: user.user, user_pic: user.user_pic};
+        this.setState({selectedUsers})
+      })
+    })
   }
 
   clearModal() {
@@ -109,7 +124,7 @@ class Root extends Component {
   }
 
   render () {
-    const {githubEvents, githubMembers, eventsByUser, selectedUsers, showModal} = this.state;
+    const {githubEvents, githubMembers, eventsByUser, selectedUsers, showModal, groups} = this.state;
 
     const shownUsers = Object.keys(selectedUsers)
     const userBoxes = shownUsers.map(u => {
@@ -129,7 +144,9 @@ class Root extends Component {
         <MemberList 
           members={githubMembers} 
           selectedUsers={selectedUsers}
-          updateSelectedUser={this.updateSelectedUser}/>
+          updateSelectedUser={this.updateSelectedUser}
+          updateGroup={this.updateGroup}
+          groups={groups}/>
         {/* repoTitle is set in app.ejs */}
         <div className='repo-title'>
           <div>Currently Winning: {this.currentWinner}</div>

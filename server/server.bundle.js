@@ -20,7 +20,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "27c20fdad829f98618b9"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "4cb273bfcd6e3e59650d"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -909,6 +909,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 __webpack_require__(15).config();
 
+var fs = __webpack_require__(16);
 
 var app = (0, _express2.default)();
 app.use(_bodyParser2.default.json());
@@ -926,6 +927,13 @@ var io = (0, _socket2.default)(http);
 //building list of github users
 var githubMembers = new _memberModel2.default();
 githubMembers.fetch();
+
+var groups = [];
+try {
+  var groupsFile = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../groups.json\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+  groups = groupsFile.groups;
+} catch (e) {}
+
 // building list of previously occuring events
 var githubEvents = new _eventList2.default();
 githubEvents.fetch();
@@ -967,7 +975,8 @@ io.on('connection', function (socket) {
   socket.on('appLoad', function (msg) {
     var connOb = {
       githubEvents: githubEvents.events,
-      githubMembers: githubMembers.members
+      githubMembers: githubMembers.members,
+      groups: groups
     };
     socket.emit('startingEventList', connOb);
   });
@@ -1363,6 +1372,12 @@ module.exports = require("crypto");
 /***/ (function(module, exports) {
 
 module.exports = require("dotenv");
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports) {
+
+module.exports = require("fs");
 
 /***/ })
 /******/ ]);
