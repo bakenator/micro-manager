@@ -151,7 +151,6 @@ class Root extends Component {
         <div className='repo-title'>
           <div>Currently Winning: {this.currentWinner}</div>
           <div>{repoTitle}</div>
-          
         </div>
         <div className='user-box-holder'>
           {userBoxes}

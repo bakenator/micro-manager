@@ -6,11 +6,12 @@
   </head>
   <body class='auth-page'>
   	<h1>Welcome to the MicroManager! &trade;</h1>
-  	<p class="sub-title">(Made for <%= repo %>)</p>
+  	<p><small>(Made for <%= repo %>)</small></p>
   	<img class='manager-image' src="/manager.png"/>
   	<p>Please click below to authenticate with Github for access to our organization's events</p>
     <p>
-      <a href="https://github.com/login/oauth/authorize?scope=read:org&client_id=<%= client_id %>">Authenticate With Github</a> 
+      <a href="https://github.com/login/oauth/authorize?scope=read:org&client_id=<%= client_id %>">Authenticate With Github!</a> 
     </p>
+    <small class="trademark">&copy; 1998/2018.<br /> This website is not intended as a substitute for the medical advice of physicians. The reader should regularly consult a physician in matters relating to their health and particularly with respect to any symptoms that may require diagnosis or medical attention.</small>
   </body>
 </html>

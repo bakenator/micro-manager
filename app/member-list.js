@@ -14,20 +14,20 @@ export default class MemberList extends Component {
     const memberList = members.map(m => {
       const selectedClass = selectedUsers[m.user] ? 'selected-user' : ''
       return (
-        <div 
-          className={`member-tile ${selectedClass}`}
+        <li 
+          className={`member-item ${selectedClass}`}
           key={m.user}
           onClick={() => updateSelectedUser(m)}
           > 
           {m.user}
-        </div>
+        </li>
       )
     })
 
     const groupList = groups.map(g => {
       return (
         <div 
-          className={`member-tile group-tile`}
+          className={`member-item group-item`}
           key={g.name}
           onClick={() => updateGroup(g)}
           > 
@@ -37,10 +37,12 @@ export default class MemberList extends Component {
     })
 
    return ( <div className="member-list">
-      <div className="title">OFFICE DRONES</div>
+      <h4 className="title">Office Drones</h4>
         <div className='members-holder'>
-          {memberList}
-          {groupList}
+          <ul>
+            {memberList}
+            {groupList}
+          </ul>
         </div>
     </div> )
   }

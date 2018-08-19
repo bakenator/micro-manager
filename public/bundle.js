@@ -61,7 +61,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "70ecf4bb20d07eb514dd"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "dcf1d2e48d464c50a619"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -37839,7 +37839,7 @@ var UserBox = function (_Component) {
           { className: 'title-bar' },
           _react2.default.createElement('img', { height: 50, width: 50, src: user_pic, alt: 'githubPic' }),
           _react2.default.createElement(
-            'div',
+            'h3',
             { className: 'user-name' },
             user
           )
@@ -38216,9 +38216,9 @@ var MemberList = function (_Component) {
       var memberList = members.map(function (m) {
         var selectedClass = selectedUsers[m.user] ? 'selected-user' : '';
         return _react2.default.createElement(
-          'div',
+          'li',
           {
-            className: 'member-tile ' + selectedClass,
+            className: 'member-item ' + selectedClass,
             key: m.user,
             onClick: function onClick() {
               return updateSelectedUser(m);
@@ -38232,7 +38232,7 @@ var MemberList = function (_Component) {
         return _react2.default.createElement(
           'div',
           {
-            className: 'member-tile group-tile',
+            className: 'member-item group-item',
             key: g.name,
             onClick: function onClick() {
               return updateGroup(g);
@@ -38246,15 +38246,19 @@ var MemberList = function (_Component) {
         'div',
         { className: 'member-list' },
         _react2.default.createElement(
-          'div',
+          'h4',
           { className: 'title' },
-          'OFFICE DRONES'
+          'Office Drones'
         ),
         _react2.default.createElement(
           'div',
           { className: 'members-holder' },
-          memberList,
-          groupList
+          _react2.default.createElement(
+            'ul',
+            null,
+            memberList,
+            groupList
+          )
         )
       );
     }
@@ -38315,8 +38319,8 @@ var InfoModal = function (_Component) {
         'div',
         { className: 'info-modal' },
         _react2.default.createElement(
-          'h1',
-          { className: 'title' },
+          'h2',
+          null,
           'Welcome!'
         ),
         _react2.default.createElement(
@@ -38327,13 +38331,13 @@ var InfoModal = function (_Component) {
         _react2.default.createElement(
           'p',
           null,
-          'You can select the workers you want to follow by ',
+          'You can select the workers you want to follow by hovering the ',
           _react2.default.createElement(
-            'strong',
+            'code',
             null,
-            'hovering the "office drones" menu'
+            'office drones'
           ),
-          ' to the right'
+          ' menu in the top right'
         ),
         _react2.default.createElement(
           'p',
@@ -38349,12 +38353,12 @@ var InfoModal = function (_Component) {
         _react2.default.createElement(
           'p',
           null,
-          'Events are updated every minute, there is no need to refresh the page'
+          'Events are updated automatically, there is no need to refresh the page'
         ),
         _react2.default.createElement(
           'p',
           null,
-          'The first worker\'s events are shown by default so you can see how little work he \\ she does'
+          'The first worker\'s events are shown by default so you can see how little work they do.'
         ),
         _react2.default.createElement(
           'p',
