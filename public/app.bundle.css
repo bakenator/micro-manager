@@ -46,7 +46,7 @@ h1 {
   text-align: center;
   border: solid 1px;
   color: black;
-  padding-right: 50px; }
+  padding-right: 250px; }
   .repo-title div {
     line-height: 5vh; }
 
@@ -72,7 +72,8 @@ h1 {
     display: flex;
     border: solid 1px black;
     background-color: white;
-    cursor: pointer; }
+    cursor: pointer;
+    color: black; }
     .user-box .event-tile .event-icon {
       padding: 4px;
       font-size: 30px;

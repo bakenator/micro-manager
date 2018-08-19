@@ -20,7 +20,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "5ca8a5f9a578b8b2034b"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "e9fb650401c5dbaf028e"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -930,7 +930,7 @@ githubMembers.fetch();
 
 var groups = [];
 try {
-  var groupsFile = __webpack_require__(17);
+  var groupsFile = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../groups.json\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
   console.log(groupsFile);
   groups = groupsFile.groups || [];
 } catch (e) {
@@ -1383,12 +1383,6 @@ module.exports = require("dotenv");
 /***/ (function(module, exports) {
 
 module.exports = require("fs");
-
-/***/ }),
-/* 17 */
-/***/ (function(module, exports) {
-
-module.exports = {"groups":[{"name":"UI","members":["bakenator","conceptlogic","lkodai","julia-allyce","ksk5280"]}]}
 
 /***/ })
 /******/ ]);
