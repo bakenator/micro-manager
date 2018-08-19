@@ -27,7 +27,7 @@ export default class MemberList extends Component {
     const groupList = groups.map(g => {
       return (
         <div 
-          className={`member-tile group-tile`}
+          className={`member-item group-item`}
           key={g.name}
           onClick={() => updateGroup(g)}
           > 

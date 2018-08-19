@@ -2,6 +2,8 @@ body {
 	background-image: url("/carpet-tiles.jpg");
 	background-color: darkgrey;
 	color: white;
+	margin: 0;
+	overflow: hidden;
 }
 /* Safari, Chrome and Opera > 12.1 */
 @-webkit-keyframes fadein {
@@ -44,6 +46,12 @@ h1 {
     height: 5vh;
     text-align: center;
     border: solid 1px;
+    color: black;
+    padding-right: 50px;
+
+    div {
+    	line-height: 5vh;
+    }
 }
 
 .user-box-holder {
@@ -58,12 +66,12 @@ h1 {
 		display: flex;
 		justify-content: space-around;
 		align-items: center;
-		width: 295px;
+		width: 299px;
 		background-color: tomato;
 	}
 
 	.spacer-div {
-		height: 60px;
+		height: 57px;
 	}
 
 	.event-list {
@@ -144,6 +152,7 @@ h1 {
 		margin: 0;
 		position: relative;
 		top: 100%;
+		border: solid 1px;
 	}
 
 	.members-holder {
@@ -152,11 +161,14 @@ h1 {
 	}
 
 	.member-item {
+		font-size: 22px;
+		margin-bottom: 5px;
+
 		&.selected-user {
 			background-color: #bcdaff;
 		}
-		&.group-tile {
-			background-color: lemonchiffon;
+		&.group-item {
+			background-color: green;
 		}
 	}
 }

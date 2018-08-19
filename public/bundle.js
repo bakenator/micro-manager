@@ -61,7 +61,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "facc9e5064cc23554bf1"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "dcf1d2e48d464c50a619"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -18151,7 +18151,7 @@ var Root = function (_Component) {
             this.currentWinner
           ),
           _react2.default.createElement(
-            'h1',
+            'div',
             null,
             repoTitle
           )
@@ -38232,7 +38232,7 @@ var MemberList = function (_Component) {
         return _react2.default.createElement(
           'div',
           {
-            className: 'member-tile group-tile',
+            className: 'member-item group-item',
             key: g.name,
             onClick: function onClick() {
               return updateGroup(g);
@@ -38353,7 +38353,7 @@ var InfoModal = function (_Component) {
         _react2.default.createElement(
           'p',
           null,
-          'Events are updated every minute, there is no need to refresh the page'
+          'Events are updated automatically, there is no need to refresh the page'
         ),
         _react2.default.createElement(
           'p',

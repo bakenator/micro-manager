@@ -1,7 +1,9 @@
 body {
   background-image: url("/carpet-tiles.jpg");
   background-color: darkgrey;
-  color: white; }
+  color: white;
+  margin: 0;
+  overflow: hidden; }
 
 /* Safari, Chrome and Opera > 12.1 */
 @-webkit-keyframes fadein {
@@ -42,7 +44,11 @@ h1 {
   background-color: #efefef;
   height: 5vh;
   text-align: center;
-  border: solid 1px; }
+  border: solid 1px;
+  color: black;
+  padding-right: 50px; }
+  .repo-title div {
+    line-height: 5vh; }
 
 .user-box-holder {
   display: flex;
@@ -55,10 +61,10 @@ h1 {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    width: 295px;
+    width: 299px;
     background-color: tomato; }
   .user-box .spacer-div {
-    height: 60px; }
+    height: 57px; }
   .user-box .event-list {
     overflow-y: scroll;
     border: solid 2px black; }
@@ -120,14 +126,18 @@ h1 {
     text-transform: uppercase;
     margin: 0;
     position: relative;
-    top: 100%; }
+    top: 100%;
+    border: solid 1px; }
   .member-list .members-holder {
     height: 100%;
     overflow-y: auto; }
-  .member-list .member-item.selected-user {
-    background-color: #bcdaff; }
-  .member-list .member-item.group-tile {
-    background-color: lemonchiffon; }
+  .member-list .member-item {
+    font-size: 22px;
+    margin-bottom: 5px; }
+    .member-list .member-item.selected-user {
+      background-color: #bcdaff; }
+    .member-list .member-item.group-item {
+      background-color: green; }
 
 .auth-page {
   text-align: center; }

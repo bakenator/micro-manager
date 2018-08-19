@@ -150,8 +150,7 @@ class Root extends Component {
         {/* repoTitle is set in app.ejs */}
         <div className='repo-title'>
           <div>Currently Winning: {this.currentWinner}</div>
-          <h1>{repoTitle}</h1>
-          
+          <div>{repoTitle}</div>
         </div>
         <div className='user-box-holder'>
           {userBoxes}
