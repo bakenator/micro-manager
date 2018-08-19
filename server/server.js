@@ -31,9 +31,10 @@ githubMembers.fetch()
 var groups = []
 try {
   var groupsFile = require('../groups.json')
-  groups = groupsFile.groups;
+  console.log(groupsFile)
+  groups = groupsFile.groups || [];
 } catch (e) {
-
+  groups = []
 }
 
 // building list of previously occuring events
@@ -87,15 +88,17 @@ http.listen(3000, function(){
 });
 
 // update events every minute, remove once webhooks work
+const updateIntervalMin = process.env.UPDATE_INTERVAL || 10
 setInterval(() => {
   githubEvents.fetch(() => {
     const connOb = {
       githubEvents: githubEvents.events,
-      githubMembers: githubMembers.members
+      githubMembers: githubMembers.members,
+      groups
     }
     io.emit('updateEventList', connOb);
   })
-}, 60000);
+}, updateIntervalMin * 60000);
 
 // remaining events
 // ProjectCardEvent

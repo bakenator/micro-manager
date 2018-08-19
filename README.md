@@ -43,6 +43,13 @@ NO_AUTH=true
 
 If you rebuild the docker container and run it, the app should now show events for your own repo
 
+## Update Interval
+
+Github public api limits users without tokens to 60 requests an hour.  Because of this, the app is set by default to update once every 10 min.  
+With a token Github allows 6000 requests an hour.  So if you added your token to the .env file, you can also add
+`UPDATE_INTERVAL=1` 
+to your .env file to set the app to update every minute.  The variable accepts any number for # of minutes.
+
 
 ## Groups
 
