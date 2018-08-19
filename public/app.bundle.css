@@ -25,7 +25,6 @@ h1 {
   padding: 5px;
   background-color: black;
   position: absolute;
-<<<<<<< HEAD
   top: 50%;
   left: 50%;
   transform: translate3d(-50%, -50%, 0);
@@ -35,12 +34,6 @@ h1 {
     background-color: turquoise;
     color: black;
     border-bottom: 1px solid lightgrey; }
-=======
-  top: calc(30vh - (/* height */300px / 2));
-  left: calc(50vw - (/* width */500px / 2)); }
-  .info-modal .title {
-    margin: 0;
-    text-align: center; }
 
 .repo-title {
   display: flex;
@@ -50,7 +43,6 @@ h1 {
   height: 5vh;
   text-align: center;
   border: solid 1px; }
->>>>>>> master
 
 .user-box-holder {
   display: flex;
@@ -132,17 +124,10 @@ h1 {
   .member-list .members-holder {
     height: 100%;
     overflow-y: auto; }
-<<<<<<< HEAD
   .member-list .member-item.selected-user {
     background-color: #bcdaff; }
-=======
-  .member-list .member-tile {
-    padding: 5px 0px 5px 20px; }
-    .member-list .member-tile.selected-user {
-      background-color: #bcdaff; }
-    .member-list .member-tile.group-tile {
-      background-color: lemonchiffon; }
->>>>>>> master
+  .member-list .member-item.group-tile {
+    background-color: lemonchiffon; }
 
 .auth-page {
   text-align: center; }

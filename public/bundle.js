@@ -61,11 +61,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-<<<<<<< HEAD
-/******/ 	var hotCurrentHash = "8d93e7a7bcb188f4b92a"; // eslint-disable-line no-unused-vars
-=======
-/******/ 	var hotCurrentHash = "70ecf4bb20d07eb514dd"; // eslint-disable-line no-unused-vars
->>>>>>> master
+/******/ 	var hotCurrentHash = "facc9e5064cc23554bf1"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -18146,11 +18142,6 @@ var Root = function (_Component) {
           updateGroup: this.updateGroup,
           groups: groups }),
         _react2.default.createElement(
-<<<<<<< HEAD
-          'h1',
-          null,
-          repoTitle
-=======
           'div',
           { className: 'repo-title' },
           _react2.default.createElement(
@@ -18160,11 +18151,10 @@ var Root = function (_Component) {
             this.currentWinner
           ),
           _react2.default.createElement(
-            'div',
+            'h1',
             null,
             repoTitle
           )
->>>>>>> master
         ),
         _react2.default.createElement(
           'div',
@@ -38263,16 +38253,12 @@ var MemberList = function (_Component) {
         _react2.default.createElement(
           'div',
           { className: 'members-holder' },
-<<<<<<< HEAD
           _react2.default.createElement(
             'ul',
             null,
-            memberList
+            memberList,
+            groupList
           )
-=======
-          memberList,
-          groupList
->>>>>>> master
         )
       );
     }
@@ -38351,7 +38337,7 @@ var InfoModal = function (_Component) {
             null,
             'office drones'
           ),
-          ' menu to the right'
+          ' menu in the top right'
         ),
         _react2.default.createElement(
           'p',
