@@ -12,7 +12,7 @@ This view can give you an overall picture of what code changes have been made in
 
 ```
 SESSION_SECRET=anySecretPhrase
-REPO=uber/deck.gl
+REPO=mrdoob/three.js
 NO_AUTH=true
 ```
 
@@ -42,6 +42,30 @@ NO_AUTH=true
 ```
 
 If you rebuild the docker container and run it, the app should now show events for your own repo
+
+## Update Interval
+
+Github public api limits users without tokens to 60 requests an hour.  Because of this, the app is set by default to update once every 10 min.  
+With a token Github allows 6000 requests an hour.  So if you added your token to the .env file, you can also add
+`UPDATE_INTERVAL=1` 
+to your .env file to set the app to update every minute.  The variable accepts any number for # of minutes.
+
+
+## Groups
+
+I got tired of having to click the same people for my working group every morning, so I added a config to the server that accepts a json definition of groups.  Each group will appear in the members list with a different background color than normal member.  When clicked, the group will remove all selected office drones and add in each github member in the group.
+Groups can be added through a config file in the top level directory titled `groups.json`.  This file is included in the .gitignore by default.
+
+The file will need to be formatted like so:
+```
+{
+	"groups": [
+		{"name":"GroupWhatever1", "members": ["GHName1", "GHName2", "GHName3"]},
+		{"name":"GroupSomething2", "members": ["GHName3", "GHName1", "GHName4"]}
+	]
+}
+```
+
 
 ## Hosting and using Github Oauth
 

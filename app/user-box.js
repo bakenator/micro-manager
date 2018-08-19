@@ -24,7 +24,8 @@ export default class UserBox extends Component {
     const oldClass = daysAgo > 0 ? 'old-event' : ''
 
     return (
-      <div key={e.id} className={`event-tile ${isNewClass || isMediumClass || oldClass}`}>
+      <div key={e.id} className={`event-tile ${isNewClass || isMediumClass || oldClass}`}
+        onClick={() => {e.link && window.open(e.link, '_blank')}}>
         <div className='event-icon'>
           {e.icon}
         </div>

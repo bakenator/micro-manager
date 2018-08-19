@@ -61,7 +61,11 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
+<<<<<<< HEAD
 /******/ 	var hotCurrentHash = "8d93e7a7bcb188f4b92a"; // eslint-disable-line no-unused-vars
+=======
+/******/ 	var hotCurrentHash = "70ecf4bb20d07eb514dd"; // eslint-disable-line no-unused-vars
+>>>>>>> master
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -17966,6 +17970,10 @@ var _infoModal = __webpack_require__(156);
 
 var _infoModal2 = _interopRequireDefault(_infoModal);
 
+var _moment = __webpack_require__(0);
+
+var _moment2 = _interopRequireDefault(_moment);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -17991,7 +17999,8 @@ var Root = function (_Component) {
       eventsByUser: {},
       //setting me to appear as the default
       selectedUsers: {},
-      showModal: true
+      showModal: true,
+      groups: []
     };
     (0, _reactAutobind2.default)(_this);
     return _this;
@@ -18010,7 +18019,7 @@ var Root = function (_Component) {
     value: function setGithubEvents(_ref) {
       var githubEvents = _ref.githubEvents,
           githubMembers = _ref.githubMembers,
-          rawEvents = _ref.rawEvents;
+          groups = _ref.groups;
       var selectedUsers = this.state.selectedUsers;
 
 
@@ -18036,7 +18045,8 @@ var Root = function (_Component) {
         githubEvents: githubEvents,
         githubMembers: activeMembers,
         eventsByUser: eventsByUser,
-        selectedUsers: setSelectedUsers
+        selectedUsers: setSelectedUsers,
+        groups: groups
       });
     }
   }, {
@@ -18073,6 +18083,29 @@ var Root = function (_Component) {
       this.setState({ selectedUsers: selectedUsers });
     }
   }, {
+    key: 'updateGroup',
+    value: function updateGroup(group) {
+      var _this2 = this;
+
+      //after clearing users, fill with selected users
+      this.setState({ selectedUsers: {} }, function () {
+        var _state = _this2.state,
+            selectedUsers = _state.selectedUsers,
+            githubMembers = _state.githubMembers;
+
+        group.members.forEach(function (m) {
+          var user = githubMembers.filter(function (g) {
+            return g.user === m;
+          })[0];
+          if (!user) {
+            return;
+          }
+          selectedUsers[user.user] = { user: user.user, user_pic: user.user_pic };
+          _this2.setState({ selectedUsers: selectedUsers });
+        });
+      });
+    }
+  }, {
     key: 'clearModal',
     value: function clearModal() {
       if (!this.state.showModal) {
@@ -18083,12 +18116,13 @@ var Root = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _state = this.state,
-          githubEvents = _state.githubEvents,
-          githubMembers = _state.githubMembers,
-          eventsByUser = _state.eventsByUser,
-          selectedUsers = _state.selectedUsers,
-          showModal = _state.showModal;
+      var _state2 = this.state,
+          githubEvents = _state2.githubEvents,
+          githubMembers = _state2.githubMembers,
+          eventsByUser = _state2.eventsByUser,
+          selectedUsers = _state2.selectedUsers,
+          showModal = _state2.showModal,
+          groups = _state2.groups;
 
 
       var shownUsers = Object.keys(selectedUsers);
@@ -18108,11 +18142,29 @@ var Root = function (_Component) {
         _react2.default.createElement(_memberList2.default, {
           members: githubMembers,
           selectedUsers: selectedUsers,
-          updateSelectedUser: this.updateSelectedUser }),
+          updateSelectedUser: this.updateSelectedUser,
+          updateGroup: this.updateGroup,
+          groups: groups }),
         _react2.default.createElement(
+<<<<<<< HEAD
           'h1',
           null,
           repoTitle
+=======
+          'div',
+          { className: 'repo-title' },
+          _react2.default.createElement(
+            'div',
+            null,
+            'Currently Winning: ',
+            this.currentWinner
+          ),
+          _react2.default.createElement(
+            'div',
+            null,
+            repoTitle
+          )
+>>>>>>> master
         ),
         _react2.default.createElement(
           'div',
@@ -18121,6 +18173,38 @@ var Root = function (_Component) {
         ),
         showModal && _react2.default.createElement(_infoModal2.default, null)
       );
+    }
+  }, {
+    key: 'currentWinner',
+    get: function get() {
+      var _state3 = this.state,
+          eventsByUser = _state3.eventsByUser,
+          selectedUsers = _state3.selectedUsers;
+
+      var users = Object.keys(eventsByUser);
+      var max = 0;
+      var timeLimit = 120; // minutes
+      var winner = '';
+      // checking for 2 hr winner and retesting with longer date range if none found
+      while (!winner && timeLimit < 1200) {
+        winner = users.reduce(function (accum, user) {
+          if (!Object.keys(selectedUsers).includes(user)) {
+            return accum;
+          }
+          var userEvents = eventsByUser[user].filter(function (e) {
+            return (0, _moment2.default)().diff((0, _moment2.default)(e.time), 'minutes') < timeLimit;
+          });
+          if (userEvents.length > max) {
+            max = userEvents.length;
+            return user;
+          }
+          return accum;
+        }, '');
+
+        timeLimit += 60;
+      }
+
+      return winner;
     }
   }]);
 
@@ -37711,7 +37795,10 @@ var UserBox = function (_Component) {
 
       return _react2.default.createElement(
         'div',
-        { key: e.id, className: 'event-tile ' + (isNewClass || isMediumClass || oldClass) },
+        { key: e.id, className: 'event-tile ' + (isNewClass || isMediumClass || oldClass),
+          onClick: function onClick() {
+            e.link && window.open(e.link, '_blank');
+          } },
         _react2.default.createElement(
           'div',
           { className: 'event-icon' },
@@ -38131,7 +38218,9 @@ var MemberList = function (_Component) {
       var _props = this.props,
           members = _props.members,
           selectedUsers = _props.selectedUsers,
-          updateSelectedUser = _props.updateSelectedUser;
+          updateSelectedUser = _props.updateSelectedUser,
+          updateGroup = _props.updateGroup,
+          groups = _props.groups;
 
 
       var memberList = members.map(function (m) {
@@ -38149,6 +38238,20 @@ var MemberList = function (_Component) {
         );
       });
 
+      var groupList = groups.map(function (g) {
+        return _react2.default.createElement(
+          'div',
+          {
+            className: 'member-tile group-tile',
+            key: g.name,
+            onClick: function onClick() {
+              return updateGroup(g);
+            }
+          },
+          g.name
+        );
+      });
+
       return _react2.default.createElement(
         'div',
         { className: 'member-list' },
@@ -38160,11 +38263,16 @@ var MemberList = function (_Component) {
         _react2.default.createElement(
           'div',
           { className: 'members-holder' },
+<<<<<<< HEAD
           _react2.default.createElement(
             'ul',
             null,
             memberList
           )
+=======
+          memberList,
+          groupList
+>>>>>>> master
         )
       );
     }

@@ -20,7 +20,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "a75fb55e14cf8be0a0bb"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "5ca8a5f9a578b8b2034b"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -741,6 +741,7 @@ var EventParser = function () {
 		key: 'PushEvent',
 		value: function PushEvent(e) {
 			var pEvent = {};
+			var branch = e.payload.ref.replace(/refs\/heads\//g, '');
 			pEvent.id = e.id;
 			pEvent.time = e.created_at;
 			pEvent.type = e.type;
@@ -748,7 +749,8 @@ var EventParser = function () {
 			pEvent.icon = '';
 			pEvent.text = '';
 			pEvent.icon = 'P';
-			pEvent.text = 'Pushed ' + e.payload.size + ' commits to ' + e.payload.ref.replace(/refs\/heads\//g, '') + ' branch';
+			pEvent.text = 'Pushed ' + e.payload.size + ' commits to ' + branch + ' branch';
+			pEvent.link = 'https://github.com/' + process.env.REPO + '/tree/' + branch;
 			return pEvent;
 		}
 	}, {
@@ -767,6 +769,7 @@ var EventParser = function () {
 			} else {
 				pEvent.text = e.payload.action + ' PR #' + e.payload.number + ' - ' + e.payload.pull_request.title;
 			}
+			pEvent.link = e.payload.pull_request.html_url;
 			return pEvent;
 		}
 	}, {
@@ -791,6 +794,7 @@ var EventParser = function () {
 			pEvent.icon = 'I';
 			pEvent.time = e.created_at;
 			pEvent.text = e.payload.action + ' issue #' + e.payload.issue.number + ' - ' + e.payload.issue.title;
+			pEvent.link = e.payload.issue.html_url;
 			return pEvent;
 		}
 	}, {
@@ -807,6 +811,7 @@ var EventParser = function () {
 			pEvent.icon = 'B';
 			pEvent.time = e.created_at;
 			pEvent.text = 'Created branch - ' + e.payload.ref;
+			pEvent.link = 'https://github.com/' + process.env.REPO + '/tree/' + e.payload.ref;
 			return pEvent;
 		}
 	}, {
@@ -823,6 +828,7 @@ var EventParser = function () {
 			pEvent.icon = 'C';
 			pEvent.time = e.created_at;
 			pEvent.text = 'Commented on issue #' + e.payload.issue.number + ' - ' + e.payload.issue.title;
+			pEvent.link = e.payload.comment.html_url;
 			return pEvent;
 		}
 	}, {
@@ -835,6 +841,7 @@ var EventParser = function () {
 			pEvent.icon = 'C';
 			pEvent.time = e.created_at;
 			pEvent.text = 'Commented on PR #' + e.payload.pull_request.number + ' - ' + e.payload.pull_request.title;
+			pEvent.link = e.payload.comment.html_url;
 			return pEvent;
 		}
 	}]);
@@ -902,6 +909,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 __webpack_require__(15).config();
 
+var fs = __webpack_require__(16);
 
 var app = (0, _express2.default)();
 app.use(_bodyParser2.default.json());
@@ -919,6 +927,16 @@ var io = (0, _socket2.default)(http);
 //building list of github users
 var githubMembers = new _memberModel2.default();
 githubMembers.fetch();
+
+var groups = [];
+try {
+  var groupsFile = __webpack_require__(17);
+  console.log(groupsFile);
+  groups = groupsFile.groups || [];
+} catch (e) {
+  groups = [];
+}
+
 // building list of previously occuring events
 var githubEvents = new _eventList2.default();
 githubEvents.fetch();
@@ -960,7 +978,8 @@ io.on('connection', function (socket) {
   socket.on('appLoad', function (msg) {
     var connOb = {
       githubEvents: githubEvents.events,
-      githubMembers: githubMembers.members
+      githubMembers: githubMembers.members,
+      groups: groups
     };
     socket.emit('startingEventList', connOb);
   });
@@ -971,15 +990,17 @@ http.listen(3000, function () {
 });
 
 // update events every minute, remove once webhooks work
+var updateIntervalMin = process.env.UPDATE_INTERVAL || 10;
 setInterval(function () {
   githubEvents.fetch(function () {
     var connOb = {
       githubEvents: githubEvents.events,
-      githubMembers: githubMembers.members
+      githubMembers: githubMembers.members,
+      groups: groups
     };
     io.emit('updateEventList', connOb);
   });
-}, 60000);
+}, updateIntervalMin * 60000);
 
 // remaining events
 // ProjectCardEvent
@@ -1356,6 +1377,18 @@ module.exports = require("crypto");
 /***/ (function(module, exports) {
 
 module.exports = require("dotenv");
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports) {
+
+module.exports = require("fs");
+
+/***/ }),
+/* 17 */
+/***/ (function(module, exports) {
+
+module.exports = {"groups":[{"name":"UI","members":["bakenator","conceptlogic","lkodai","julia-allyce","ksk5280"]}]}
 
 /***/ })
 /******/ ]);

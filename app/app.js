@@ -5,6 +5,7 @@ import autobind from 'react-autobind'
 import UserBox from './user-box'
 import MemberList from './member-list'
 import InfoModal from './info-modal'
+import moment from 'moment'
 
 class Root extends Component {
   constructor (props) {
@@ -15,7 +16,8 @@ class Root extends Component {
       eventsByUser: {},
       //setting me to appear as the default
       selectedUsers: {},
-      showModal: true
+      showModal: true,
+      groups: []
     }
     autobind(this)
   }
@@ -27,7 +29,7 @@ class Root extends Component {
       socket.emit('appLoad', {});
   }
 
-  setGithubEvents({githubEvents, githubMembers, rawEvents}) {
+  setGithubEvents({githubEvents, githubMembers, groups}) {
     const {selectedUsers} = this.state;
 
     const eventsByUser = {}
@@ -48,7 +50,8 @@ class Root extends Component {
       githubEvents,
       githubMembers: activeMembers,
       eventsByUser,
-      selectedUsers: setSelectedUsers
+      selectedUsers: setSelectedUsers,
+      groups
     })
   }
 
@@ -78,13 +81,50 @@ class Root extends Component {
     this.setState({selectedUsers})
   }
 
+  updateGroup(group) {
+    //after clearing users, fill with selected users
+    this.setState({selectedUsers:{}}, () => {
+      const {selectedUsers, githubMembers} = this.state;
+      group.members.forEach(m => {
+        const user = githubMembers.filter(g => g.user === m)[0]
+        if (!user) {return}
+        selectedUsers[user.user] = {user: user.user, user_pic: user.user_pic};
+        this.setState({selectedUsers})
+      })
+    })
+  }
+
   clearModal() {
     if (!this.state.showModal) {return}
     this.setState({showModal: false})
   }
 
+  get currentWinner() {
+    const {eventsByUser, selectedUsers} = this.state
+    const users = Object.keys(eventsByUser)
+    let max = 0
+    let timeLimit = 120 // minutes
+    let winner = ''
+    // checking for 2 hr winner and retesting with longer date range if none found
+    while (!winner && timeLimit < 1200) {
+      winner = users.reduce((accum, user) => {
+        if (!Object.keys(selectedUsers).includes(user)) {return accum}
+        const userEvents = eventsByUser[user].filter(e => moment().diff(moment(e.time), 'minutes') < timeLimit)
+        if (userEvents.length > max) {
+          max = userEvents.length
+          return user
+        }
+        return accum
+      }, '')
+
+      timeLimit += 60
+    }
+
+    return winner
+  }
+
   render () {
-    const {githubEvents, githubMembers, eventsByUser, selectedUsers, showModal} = this.state;
+    const {githubEvents, githubMembers, eventsByUser, selectedUsers, showModal, groups} = this.state;
 
     const shownUsers = Object.keys(selectedUsers)
     const userBoxes = shownUsers.map(u => {
@@ -104,9 +144,15 @@ class Root extends Component {
         <MemberList 
           members={githubMembers} 
           selectedUsers={selectedUsers}
-          updateSelectedUser={this.updateSelectedUser}/>
+          updateSelectedUser={this.updateSelectedUser}
+          updateGroup={this.updateGroup}
+          groups={groups}/>
         {/* repoTitle is set in app.ejs */}
-        <h1>{repoTitle}</h1>
+        <div className='repo-title'>
+          <div>Currently Winning: {this.currentWinner}</div>
+          <h1>{repoTitle}</h1>
+          
+        </div>
         <div className='user-box-holder'>
           {userBoxes}
         </div>

@@ -20,6 +20,7 @@ export default class EventParser {
 
 	PushEvent(e) {
 		const pEvent = {}
+		const branch = e.payload.ref.replace(/refs\/heads\//g,'')
 		pEvent.id = e.id;
 	      pEvent.time = e.created_at;
 	      pEvent.type = e.type;
@@ -27,7 +28,8 @@ export default class EventParser {
 	      pEvent.icon = '';
 	      pEvent.text = '';
 	      pEvent.icon = 'P';
-	      pEvent.text = `Pushed ${e.payload.size} commits to ${e.payload.ref.replace(/refs\/heads\//g,'')} branch` 
+	      pEvent.text = `Pushed ${e.payload.size} commits to ${branch} branch`
+	      pEvent.link = `https://github.com/${process.env.REPO}/tree/${branch}`
 	      return pEvent;
 	}
 
@@ -45,6 +47,7 @@ export default class EventParser {
 	      } else {
 	        pEvent.text = `${e.payload.action} PR #${e.payload.number} - ${e.payload.pull_request.title}`
 	      }
+	      pEvent.link = e.payload.pull_request.html_url
 	      return pEvent;
 	}
 
@@ -67,6 +70,7 @@ export default class EventParser {
 	      pEvent.icon = 'I';
 	      pEvent.time = e.created_at
 	      pEvent.text = `${e.payload.action} issue #${e.payload.issue.number} - ${e.payload.issue.title}`;
+	      pEvent.link = e.payload.issue.html_url
 	      return pEvent
 	}
 
@@ -80,6 +84,7 @@ export default class EventParser {
 	      pEvent.icon = 'B';
 	      pEvent.time = e.created_at
 	      pEvent.text = `Created branch - ${e.payload.ref}`
+	      pEvent.link = `https://github.com/${process.env.REPO}/tree/${e.payload.ref}`
 	      return pEvent
 	}
 
@@ -93,6 +98,7 @@ export default class EventParser {
 	      pEvent.icon = 'C';
 	      pEvent.time = e.created_at
 	      pEvent.text = `Commented on issue #${e.payload.issue.number} - ${e.payload.issue.title}`
+	      pEvent.link = e.payload.comment.html_url
 	      return pEvent
 	}
 
@@ -104,6 +110,7 @@ export default class EventParser {
 	      pEvent.icon = 'C';
 	      pEvent.time = e.created_at
 	      pEvent.text = `Commented on PR #${e.payload.pull_request.number} - ${e.payload.pull_request.title}`
+	      pEvent.link = e.payload.comment.html_url
 	      return pEvent
 	}
 

@@ -9,6 +9,7 @@ import MemberModel from './member-model'
 import session from 'express-session'
 import ejs from 'ejs'
 import Authentication from './authentication'
+var fs = require("fs");
 
 const app = express()
 app.use(bodyParser.json())
@@ -26,6 +27,16 @@ const io = socket(http)
 //building list of github users
 const githubMembers = new MemberModel();
 githubMembers.fetch()
+
+var groups = []
+try {
+  var groupsFile = require('../groups.json')
+  console.log(groupsFile)
+  groups = groupsFile.groups || [];
+} catch (e) {
+  groups = []
+}
+
 // building list of previously occuring events
 const githubEvents = new EventList();
 githubEvents.fetch()
@@ -65,7 +76,8 @@ io.on('connection', function(socket){
   socket.on('appLoad', function(msg) {
     const connOb = {
       githubEvents: githubEvents.events,
-      githubMembers: githubMembers.members
+      githubMembers: githubMembers.members,
+      groups
     }
     socket.emit('startingEventList', connOb);
   });
@@ -76,15 +88,17 @@ http.listen(3000, function(){
 });
 
 // update events every minute, remove once webhooks work
+const updateIntervalMin = process.env.UPDATE_INTERVAL || 10
 setInterval(() => {
   githubEvents.fetch(() => {
     const connOb = {
       githubEvents: githubEvents.events,
-      githubMembers: githubMembers.members
+      githubMembers: githubMembers.members,
+      groups
     }
     io.emit('updateEventList', connOb);
   })
-}, 60000);
+}, updateIntervalMin * 60000);
 
 // remaining events
 // ProjectCardEvent
