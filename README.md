@@ -1,4 +1,4 @@
-#   Micro-Manager
+#    Micro-Manager
 
 ![Micro-Manager](https://raw.githubusercontent.com/bakenator/micro-manager/master/public/example.png)
 
