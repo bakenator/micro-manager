@@ -1,5 +1,5 @@
 # Micro-Manager
-
+ 
 ![Micro-Manager](https://raw.githubusercontent.com/bakenator/micro-manager/master/public/example.png)
 
 Micro-Manager is a little application that can be used to keep your workers under your thumb.
